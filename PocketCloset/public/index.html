@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Morse Code Application</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Morse Code Application</a>
+  </nav>
+  <div id="mainPage" class="container page-container">
+    <h2 id="transmission">Transmission goes here</h2>
+    <h2 id="translation">Translation goes here</h2>
+      <div id="buttons">
+       <button data-transmits="dot">. (dot)</button>
+       <button data-transmits="dash">- (dash)</button>
+       <button data-transmits="letterspace">/ (letter space)</button>
+       <button data-transmits="wordspace">// (wordspace)</button>
+      </div>
+
+
+  </div>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
