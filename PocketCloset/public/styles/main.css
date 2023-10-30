@@ -1,6 +1,5 @@
 body {
     background: #DDDDDD;
-    text-align: center;
 }
 
 .navbar {
@@ -12,12 +11,96 @@ body {
     margin-top: 75px;
 }
 
-#rosefireButton{
-    display:block;
-    margin: 60px auto;
-    color:white;
-    background: #800000;
-    font-size:1.1em;
-    padding:10px 30px;
-    border-radius:5px;
+#fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+    background-color: #800000;
+    color: white;
 }
+
+#fab:active {
+    transform: translateY(2px);
+    opacity: 0.8;
+}
+
+.card {
+    margin: 10px 0;
+}
+
+#listPage .card-title,
+#listPage .card-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.dropdown-menu-right {
+    left: -128px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+#logo{
+    max-width: 350px;
+    margin: 20px auto;
+    display: block;
+}
+
+#rosefireButton{
+    display: block;
+    margin: 60px auto;
+    color: white;
+    background: #800000;
+    font-size: 1.1em;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+
+.bmd-layout-content{
+    height: 100vh;
+}
+
+.bmd-layout-drawer>header{
+    background-color: #800000;
+    color: white;
+}
+
+.bmd-layout-drawer>ul{
+    background-color: white;
+}
+
+.list-group-item :first-child {
+    margin-right: 0.75rem;
+}
+
+#menuEdit,
+#menuDelete {
+    display: none;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+#submitName {
+    background-color: #800000;
+    color: white;
+}
+
+#authorBox {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    z-index: 999;
+ }
+ 
+ #detailPage #profilePhoto {
+    display: block;
+    max-width: 150px;
+    max-height: 200px;
+ }
+
