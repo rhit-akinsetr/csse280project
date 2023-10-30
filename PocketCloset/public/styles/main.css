@@ -1,0 +1,23 @@
+body {
+    background: #DDDDDD;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#rosefireButton{
+    display:block;
+    margin: 60px auto;
+    color:white;
+    background: #800000;
+    font-size:1.1em;
+    padding:10px 30px;
+    border-radius:5px;
+}
