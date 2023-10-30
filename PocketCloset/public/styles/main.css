@@ -1,9 +1,10 @@
 body {
     background: #DDDDDD;
+    text-align: center;
 }
 
 .navbar {
-    background-color: #800000;
+    background-color: #D2B48C;
     color: white;
 }
 
@@ -11,96 +12,90 @@ body {
     margin-top: 75px;
 }
 
-#fab {
+#fab{
     position: fixed;
-    bottom: 10px;
     right: 10px;
-    z-index: 999;
-    background-color: #800000;
+    bottom: 10px;
+    background-color:#D2B48C;
     color: white;
+    z-index: 999;
 }
-
-#fab:active {
+#fab:active{
     transform: translateY(2px);
-    opacity: 0.8;
+    opacity: .8;
 }
 
-.card {
-    margin: 10px 0;
+
+#listPage{
+display: flex;
+flex-direction: row;
+}
+#columns {
+    column-count: 3;
+    column-gap:5px;
+}
+@media (min-width: 992px) {
+    #columns {
+        column-count: 4;
+        column-gap: 10px;
+    }
 }
 
-#listPage .card-title,
-#listPage .card-subtitle {
-    white-space: nowrap;
+
+
+
+.pin {
+    display: inline-block;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    margin: 0 2px 15px;
+    background: linear-gradient(45deg, #FFF, #EEE);
+    transition: all .2s ease;
+}
+
+.pin img {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 3px;
+}
+
+.pin p {
+    font: 12px/18px Arial, sans-serif;
+    text-align: center;
+    color: #333;
+    margin: 0;
+    max-height: 18px;
     overflow: hidden;
 }
-
-
-.dropdown-menu-right {
-    left: -128px;
-}
-
-.dropdown-item {
-    cursor: pointer;
-}
-
-#logo{
-    max-width: 350px;
-    margin: 20px auto;
-    display: block;
-}
-
-#rosefireButton{
-    display: block;
-    margin: 60px auto;
-    color: white;
-    background: #800000;
-    font-size: 1.1em;
-    padding: 10px 30px;
-    border-radius: 5px;
+.dropdown-menu.dropdown-menu-right, .dropdown-menu[x-placement=bottom-end] {
+left: -130px;
 }
 
 .bmd-layout-content{
     height: 100vh;
 }
-
 .bmd-layout-drawer>header{
-    background-color: #800000;
-    color: white;
+background-color:#D2B48C;
+color:white;
 }
-
 .bmd-layout-drawer>ul{
-    background-color: white;
+background-color: #ddd;
+}
+.top{
+    text-align: center;
+    margin-top: 8vh;
 }
 
-.list-group-item :first-child {
-    margin-right: 0.75rem;
+
+#rosefireButton{
+    display:block;
+    margin: 60px auto;
+    color:white;
+    background: #800000;
+    font-size:1.1em;
+    padding:10px 30px;
+    border-radius:5px;
 }
 
-#menuEdit,
-#menuDelete {
+#menuEdit, #menuDelete{
     display: none;
 }
-
-.list-group-item {
-    cursor: pointer;
-}
-
-#submitName {
-    background-color: #800000;
-    color: white;
-}
-
-#authorBox {
-    position: fixed;
-    bottom: 10px;
-    right: 20px;
-    z-index: 999;
- }
- 
- #detailPage #profilePhoto {
-    display: block;
-    max-width: 150px;
-    max-height: 200px;
- }
-

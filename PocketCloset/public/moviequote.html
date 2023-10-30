@@ -5,89 +5,96 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <title>Movie Quote</title>
+  <title>My Photo Bucket</title>
 </head>
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="/list.html">Movie Quote</a>
-    <div class="dropdown pull-xs-right">
-      <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="navbar-brand" href="#">My Photo Bucket</a>
+    <div class="dropdown pull-as-right">
+      <button class="btn bmd-btn-icon dropdoan-toggle" type="button" id="lr1" data-toggle="dropdown">
         <i class="material-icons">more_vert</i>
       </button>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
-        <button class="dropdown-item" type="button" id="menuEdit" data-toggle="modal" data-target="#editQuoteDialog"><i class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit</button>
-        <button class="dropdown-item" type="button" id="menuDelete" data-toggle="modal" data-target="#deleteQuoteDialog"><i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</button>
-        <button class="dropdown-item" type="button" id="menuSignOut"><i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Sign Out</button>
+      <div class="dropdown-menu dropdown-menu-right" aria-menu-right="lr1">
+        <button id="menuEdit" class="dropdown-item" type="button" data-toggle="modal" data-target="#editDialog">
+          <i class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit
+        </button>
+        <button id="menuDelete" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteDialog">
+          <i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete
+        </button>
+        <button id="menuSignOut" class="dropdown-item" type="button">
+          <i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Sign Out
+        </button>
       </div>
-    </div>
   </nav>
+
   <div id="detailPage" class="container page-container">
-    <div class="card">
+    <div class="pin">
       <div class="card-body">
-        <h5 id="cardQuote" class="card-title">Loading...</h5>
-        <h6 id="cardMovie" class="card-subtitle mb-2 text-muted"></h6>
+        <img id="cardUrl" class="card-img-bottom img-fluid" alt="poster" src="">
+        <hr>
+        <p id="cardCaption" class="card-subtitle mb-2 text-muted text-center">loading...</p>
       </div>
     </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="editQuoteDialog" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit this quote</h5>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="inputQuote">Quote</label>
-            <input type="text" class="form-control" id="inputQuote" placeholder="">
+
+    <div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="Edit dialog"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit this Photo's Caption</h5>
           </div>
-          <div class="form-group">
-            <label for="inputMovie">Movie</label>
-            <input type="text" class="form-control" id="inputMovie" placeholder="">
-            <span class="bmd-help">What movie is this quote from?</span>
+          <div class="modal-body">
+            <div class="form-group bmd-form-group">
+              <label for="inputCaption">caption</label>
+              <input type="text" class="form-control" id="inputCaption" placeholder="">
+              <span class="bmd-help">Photo description?</span>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            <button id="submitEditCaption" type="button" class="btn btn-primary" data-dismiss="modal">UPDATE</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="submitEditQuote" class="btn btn-primary" data-dismiss="modal">SAVE</button>
+      </div>
+    </div>
+
+    <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="Delete dialog"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete this Caption</h5>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this caption?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            <button id="submitDelete" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="deleteQuoteDialog" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Delete this quote</h5>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete this movie quote?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="submitDeleteQuote" class="btn btn-primary" data-dismiss="modal">DELETE</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/popper.js"></script>
-  <script src="scripts/bootstrap-material-design.js"></script>
-  <script>
-    $("body").bootstrapMaterialDesign();
-  </script>
-  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
-  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
-  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
-  <script src="/__/firebase/init.js"></script>
-  <script src="scripts/main.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/popper.js"></script>
+    <script src="scripts/bootstrap-material-design.js"></script>
+    <script>
+      $("body").bootstrapMaterialDesign();
+    </script>
+    <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+    <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
+    <script src="scripts/rosefire.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>
