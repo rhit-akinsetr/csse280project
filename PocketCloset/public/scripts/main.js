@@ -24,11 +24,20 @@ rhit.ListPageController = class {
 	constructor() {
 
 
-		document.querySelector("#menuAllPhotos").addEventListener("click", (event) => {
-			window.location.href = "/list.html";
+		document.querySelector("#menuTops").addEventListener("click", (event) => {
+			console.log("tops")
 		});
-		document.querySelector("#menuMyPhotos").addEventListener("click", (event) => {
-			window.location.href = `/list.html?uid=${rhit.fbAuthManager.uid}`;
+		document.querySelector("#menuBottoms").addEventListener("click", (event) => {
+			console.log("bottoms");
+		});
+		document.querySelector("#menuShoes").addEventListener("click", (event) => {
+			console.log("shoes");
+		});
+		document.querySelector("#menuEyewear").addEventListener("click", (event) => {
+			console.log("eyewear");
+		});
+		document.querySelector("#menuAccessories").addEventListener("click", (event) => {
+			console.log("accessories");
 		});
 		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
 			rhit.fbAuthManager.signOut();
@@ -336,7 +345,7 @@ rhit.FbSingleCaptionManager = class {
    rhit.checkForRedirects = function(){
 
 	if(document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn){
-		window.location.href = "/list.html";
+		window.location.href = "/outfit.html";
 	}
 
 	if(!document.querySelector("#loginPage") && !(rhit.fbAuthManager.isSignedIn)){
@@ -406,5 +415,19 @@ rhit.startFirebaseUI=function(){
       ui.start('#firebaseui-auth-container', uiConfig);
 
 }
+
+function allowDrop(ev) {
+	ev.preventDefault();
+  }
+  
+  function drag(ev) {
+	ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
+  function drop(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+  }
 
 rhit.main();

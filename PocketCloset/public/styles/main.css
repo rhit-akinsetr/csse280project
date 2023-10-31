@@ -69,9 +69,9 @@ flex-direction: row;
 .dropdown-menu.dropdown-menu-right, .dropdown-menu[x-placement=bottom-end] {
 left: -130px;
 }
-
 .bmd-layout-content{
     height: 100vh;
+    /* width: 50000vh; */
 }
 .bmd-layout-drawer>header{
 background-color:#D2B48C;
@@ -99,3 +99,10 @@ background-color: #ddd;
 #menuEdit, #menuDelete{
     display: none;
 }
+
+#div1, #div2, #div3, #div4, #div5{
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+  }
