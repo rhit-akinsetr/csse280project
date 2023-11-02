@@ -35,6 +35,7 @@
         <a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a>
         <a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
         <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
+        <div id="menuClothingType"></div>
       </ul>
     </div>
 
@@ -42,27 +43,21 @@
     <div id="listPage" class="container page-container image-fluid">
 
       <div id="listPageContainer"></div>
-      <h1>Drag a Shirt</h1>
-      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div class="flex-grid">
+      
+      <div class="row">
+      <!-- Shirt -->
+      <h3>Drag your Outfit</h3>
+      <div class="col" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div class="col" id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div class="col" id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       <img id="drag1" src="images/shirt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+      <img id="drag2" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+      <img id="drag3" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+      <img id="drag2" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+      <img id="drag2" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
 
-      <h1>Drag a Bottoms</h1>
-      <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <img id="drag1" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
-      <h1>Drag a Shoes</h1>
-      <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <img id="drag1" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
-      <h1>Drag a Eyewear</h1>
-      <div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <img id="drag1" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
-      <h1>Drag a Accessories</h1>
-      <div id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <img id="drag1" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
-
+      </div>
     </div>
 
 
@@ -81,7 +76,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Photo with Caption</h5>
+            <h5 class="modal-title">Add Clothing with Description</h5>
           </div>
           <div class="modal-body">
 
@@ -89,10 +84,16 @@
               <label for="inputUrl">url</label>
               <input type="text" class="form-control" id="inputUrl">
             </div>
-            <div class="form-group bmd-form-group">
-              <label for="inputCaption">caption</label>
-              <input type="text" class="form-control" id="inputCaption">
-              <span class="bmd-help">caption description?</span>
+            <div class="form-group bmd-form-group img-fluid">
+              <label for="inputCaption">Type:</label>
+              <!-- <input type="text" class="form-control" id="inputCaption"> -->
+              <!-- <span class="bmd-help">enter the type of clothing</span> -->
+              <input id="topsOption" type="radio" value="tops" name="drone"><label for="tops">Tops</label></input>
+              <input id="bottomOption" type="radio" value="tops" name="drone"><label for="bottoms">Bottoms</label></input>
+              <input id="shoesOption" type="radio" value="tops" name="drone"><label for="shoes">Shoes</label></input>
+              <input id="eyewearOption" type="radio" value="tops" name="drone"><label for="eyewear">Eyewear</label></input>
+              <div><input id="accessoriesOption" type="radio" value="tops" name="drone"><label
+                  for="accessories">Accessories</label></input></div>
             </div>
 
           </div>

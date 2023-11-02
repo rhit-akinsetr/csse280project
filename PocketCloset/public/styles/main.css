@@ -10,30 +10,34 @@ body {
 
 .page-container {
     margin-top: 75px;
+    display: block;
 }
 
-#fab{
+#fab {
     position: fixed;
     right: 10px;
     bottom: 10px;
-    background-color:#D2B48C;
+    background-color: #D2B48C;
     color: white;
     z-index: 999;
 }
-#fab:active{
+
+#fab:active {
     transform: translateY(2px);
     opacity: .8;
 }
 
 
-#listPage{
-display: flex;
-flex-direction: row;
+#listPage {
+    display: flex;
+    flex-direction: row;
 }
+
 #columns {
     column-count: 3;
-    column-gap:5px;
+    column-gap: 5px;
 }
+
 @media (min-width: 992px) {
     #columns {
         column-count: 4;
@@ -66,43 +70,80 @@ flex-direction: row;
     max-height: 18px;
     overflow: hidden;
 }
-.dropdown-menu.dropdown-menu-right, .dropdown-menu[x-placement=bottom-end] {
-left: -130px;
+
+.dropdown-menu.dropdown-menu-right,
+.dropdown-menu[x-placement=bottom-end] {
+    left: -130px;
 }
-.bmd-layout-content{
+
+.bmd-layout-content {
     height: 100vh;
     /* width: 50000vh; */
 }
-.bmd-layout-drawer>header{
-background-color:#D2B48C;
-color:white;
+
+.bmd-layout-drawer>header {
+    background-color: #D2B48C;
+    color: white;
 }
-.bmd-layout-drawer>ul{
-background-color: #ddd;
+
+.bmd-layout-drawer>ul {
+    background-color: #ddd;
 }
-.top{
+
+.top {
     text-align: center;
     margin-top: 8vh;
 }
 
 
-#rosefireButton{
-    display:block;
+#rosefireButton {
+    display: block;
     margin: 60px auto;
-    color:white;
+    color: white;
     background: #800000;
-    font-size:1.1em;
-    padding:10px 30px;
-    border-radius:5px;
+    font-size: 1.1em;
+    padding: 10px 30px;
+    border-radius: 5px;
 }
 
-#menuEdit, #menuDelete{
+#menuEdit,
+#menuDelete {
     display: none;
 }
 
-#div1, #div2, #div3, #div4, #div5{
-    width: 350px;
-    height: 70px;
+#div1,
+#div2,
+#div3,
+#div4,
+#div5 {
+    width: auto;
+    height: auto;
+    /* width: 350px;
+    height: 70px; */
     padding: 10px;
-    border: 1px solid #aaaaaa;
-  }
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+h3 {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.flex-grid {
+    display: flex;
+}
+
+.col {
+    flex: 1;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 10%;
+}
