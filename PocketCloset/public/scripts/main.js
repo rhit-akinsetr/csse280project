@@ -78,7 +78,7 @@ rhit.ListPageController = class {
 	}
 	_createCard(picture) {
 		return htmlToElement(` <div class="pin">
-		  <img id="cardPoster" class="img-fluid card-img-bottom" alt="poster" src=${picture.url}>
+		  <img id="cardPoster" class="img-fluid card-img-bottom" draggable="true" ondragstart="drag(event)" alt="poster" src=${picture.url}>
          <p class="card-text text-center">${picture.type}</p>
         </div>`);
 	}
