@@ -25,19 +25,22 @@
     </header>
 
     <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      
       <header>
         <a class="navbar-brand">My Photo Bucket</a>
       </header>
+      <main>
+      <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
+      </div>
       <ul class="list-group">
         <a id="menuTops" class="list-group-item"><i class="material-icons">person</i>Show My Tops</a>
         <a id="menuBottoms" class="list-group-item"><i class="material-icons">people</i>Show My Bottoms</a>
         <a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a>
         <a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a>
         <a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
-        <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
         <div id="menuClothingType"></div>
       </ul>
-    </div>
+    <!-- </div> -->
 
 
     <div id="listPage" class="container page-container image-fluid">
@@ -49,14 +52,6 @@
       <!-- Shirt -->
       <h3>Drag your Outfit</h3>
       <div class="col" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <div class="col" id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <div class="col" id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-      <img id="drag1" src="images/shirt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-      <img id="drag2" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-      <img id="drag3" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-      <img id="drag2" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-      <img id="drag2" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
       </div>
     </div>
 
@@ -88,13 +83,14 @@
               <label for="inputCaption">Type:</label>
               <!-- <input type="text" class="form-control" id="inputCaption"> -->
               <!-- <span class="bmd-help">enter the type of clothing</span> -->
-              <input id="topsOption" type="radio" value="tops" name="drone"><label for="tops">Tops</label></input>
-              <input id="bottomOption" type="radio" value="tops" name="drone"><label for="bottoms">Bottoms</label></input>
-              <input id="shoesOption" type="radio" value="tops" name="drone"><label for="shoes">Shoes</label></input>
-              <input id="eyewearOption" type="radio" value="tops" name="drone"><label for="eyewear">Eyewear</label></input>
-              <div><input id="accessoriesOption" type="radio" value="tops" name="drone"><label
-                  for="accessories">Accessories</label></input></div>
+              <form>
+              <input id="topsOption" type="radio" value="tops" name="type"><label for="tops">Tops</label></input>
+              <input id="bottomOption" type="radio" value="bottoms" name="type"><label for="bottoms">Bottoms</label></input>
+              <input id="shoesOption" type="radio" value="shoes" name="type"><label for="shoes">Shoes</label></input>
+              <input id="eyewearOption" type="radio" value="eyewear" name="type"><label for="eyewear">Eyewear</label></input>
+              <div><input id="accessoriesOption" type="radio" value="accessories" name="type"><label for="accessories">Accessories</label></input></div>
             </div>
+          </form>
 
           </div>
           <div class="modal-footer">
@@ -104,7 +100,7 @@
         </div>
       </div>
     </div>
-    <main class="bmd-layout-content">
+    <!-- <main class="bmd-layout-content"> -->
       <div id="listPage" class="container page-container">
 
         <div id="listContainer">

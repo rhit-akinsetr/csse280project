@@ -1,13 +1,13 @@
 var rhit = rhit || {};
 
-rhit.FB_COLLECTION_PHOTOBUCKET = "Photos";
+rhit.FB_COLLECTION_CLOTHING = "Clothing";
 rhit.FB_KEY_URL = "url";
-rhit.FB_KEY_CAPTION = "caption";
+rhit.FB_KEY_TYPE_OF_CLOTHING = "type";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
-rhit.FB_KEY_AUTHOR = "author";
+rhit.FB_KEY_USER = "user";
 
 rhit.fbPhotosManager = null;
-rhit.FbSingleCaptionManager = null;
+rhit.FbSingleTypeManager = null;
 rhit.fbAuthManager = null;
 
 
@@ -25,23 +25,25 @@ rhit.ListPageController = class {
 
 		document.querySelector("#menuTops").addEventListener("click", (event) => {
 			console.log("tops");
-			document.querySelector("#menuClothingType").innerHTML = '<img id="drag1" src="images/shirt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">';
+			
+			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag1" src="images/shirt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
+			
 		});
 		document.querySelector("#menuBottoms").addEventListener("click", (event) => {
 			console.log("bottoms");
-			document.querySelector("#menuClothingType").innerHTML = '<img id="drag2" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">';
+			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag2" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
 		});
 		document.querySelector("#menuShoes").addEventListener("click", (event) => {
 			console.log("shoes");
-			document.querySelector("#menuClothingType").innerHTML = '<img id="drag3" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">';
+			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag3" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
 		});
 		document.querySelector("#menuEyewear").addEventListener("click", (event) => {
 			console.log("eyewear");
-			document.querySelector("#menuClothingType").innerHTML = '<img id="drag4" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">';
+			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag4" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
 		});
 		document.querySelector("#menuAccessories").addEventListener("click", (event) => {
 			console.log("accessories");
-			document.querySelector("#menuClothingType").innerHTML = '<img id="drag5" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">';
+			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag5" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
 		});
 		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
 			rhit.fbAuthManager.signOut();
@@ -49,9 +51,15 @@ rhit.ListPageController = class {
 
 		document.querySelector("#submitAddPhoto").addEventListener("click", (event) => {
 			const url = document.querySelector("#inputUrl").value;
-			const caption = document.querySelector("#inputCaption").value;
-
-			rhit.fbPhotosManager.add(url, caption);
+			const rButtons = document.getElementsByName("type");
+			let type = rButtons[0];
+			for( let i = 0; i<rButtons.length; i++){
+				if(rButtons[i].checked){
+					type = (rButtons[i].value);
+				}
+			}
+			
+			rhit.fbPhotosManager.add(url, type);
 		})
 
 		$("#addDialog").on("show.bs.modal", (event) => {
@@ -71,7 +79,7 @@ rhit.ListPageController = class {
 	_createCard(picture) {
 		return htmlToElement(` <div class="pin">
 		  <img id="cardPoster" class="img-fluid card-img-bottom" alt="poster" src=${picture.url}>
-         <p class="card-text text-center">${picture.caption}</p>
+         <p class="card-text text-center">${picture.type}</p>
         </div>`);
 	}
 	updateList() {
@@ -96,27 +104,28 @@ rhit.ListPageController = class {
 	}
 }
 
-rhit.PhotoCaption = class {
-	constructor(id, url, caption) {
+rhit.PhotoType = class {
+	constructor(id, url, type) {
 		this.id = id;
 		this.url = url;
-		this.caption = caption;
+		this.type = type;
 	}
 }
+
 rhit.FbPhotosManager = class {
 	constructor(uid) {
 		this._uid = uid;
 		this._documentSnapshots = [];
-		this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_PHOTOBUCKET);
+		this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_CLOTHING);
 		this._unsubscribe = null;
 	}
-	add(url, caption) {
+	add(url, type) {
 
 
 		this._ref.add({
 				[rhit.FB_KEY_URL]: url,
-				[rhit.FB_KEY_CAPTION]: caption,
-				[rhit.FB_KEY_AUTHOR]: rhit.fbAuthManager.uid,
+				[rhit.FB_KEY_TYPE_OF_CLOTHING]: type,
+				[rhit.FB_KEY_USER]: rhit.fbAuthManager.uid,
 				[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 			})
 			.then(function (docRef) {
@@ -132,7 +141,7 @@ rhit.FbPhotosManager = class {
 		let query = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50);
 
 		if (this._uid) {
-			query = query.where(rhit.FB_KEY_AUTHOR, "==", this._uid);
+			query = query.where(rhit.FB_KEY_USER, "==", this._uid);
 		}
 
 
@@ -152,18 +161,14 @@ rhit.FbPhotosManager = class {
 	}
 	fbPhotosManager(index) {
 		const docSnapshot = this._documentSnapshots[index];
-		const mq = new rhit.PhotoCaption(
+		const type = new rhit.PhotoType(
 			docSnapshot.id,
 			docSnapshot.get(rhit.FB_KEY_URL),
-			docSnapshot.get(rhit.FB_KEY_CAPTION),
+			docSnapshot.get(rhit.FB_KEY_TYPE_OF_CLOTHING),
 		);
-		return mq;
+		return type;
 	}
 }
-
-
-
-
 
 
 
@@ -173,24 +178,8 @@ rhit.DetailPageController = class {
 			rhit.fbAuthManager.signOut();
 
 		});
-		document.querySelector("#submitEditCaption").addEventListener("click", (event) => {
-			const caption = document.querySelector("#inputCaption").value;
-
-			rhit.FbSingleCaptionManager.update(caption);
-		})
-
-		$("#editDialog").on("show.bs.modal", (event) => {
-
-			document.querySelector("#inputCaption").value = rhit.FbSingleCaptionManager.caption;
-		});
-		$("#editDialog").on("shown.bs.modal", (event) => {
-
-			document.querySelector("#inputCaption").focus();
-
-		});
 
 		document.querySelector("#submitDelete").addEventListener("click", (event) => {
-
 
 			rhit.FbSingleCaptionManager.delete().then(function () {
 				console.log("document sucessfully deleted:")
@@ -285,14 +274,16 @@ rhit.FbAuthManager = class {
 	}
 }
 
-
-rhit.FbSingleCaptionManager = class {
+rhit.FbSingleTypeManager = class {
 	constructor(photoID) {
 		this._documentSnapshot = {};
 		this._unsubscribe = null;
-		this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_PHOTOBUCKET).doc(photoID);
+		this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_CLOTHING).doc(photoID);
 		console.log(`listening to ${this._ref.path}`);
 	}
+
+	 
+
 	beginListening(changeListener) {
 
 
@@ -312,19 +303,6 @@ rhit.FbSingleCaptionManager = class {
 	stopListening() {
 		this._unsubscribe();
 	}
-	update(caption) {
-		this._ref.update({
-
-				[rhit.FB_KEY_CAPTION]: caption,
-				[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-			})
-			.then(() => {
-				console.log("Document is sucesfully updated");
-			})
-			.catch(function (error) {
-				console.error("Error adding document", error);
-			});
-	}
 	delete() {
 		return this._ref.delete();
 	}
@@ -333,11 +311,11 @@ rhit.FbSingleCaptionManager = class {
 		return this._documentSnapshot.get(rhit.FB_KEY_URL);
 	}
 
-	get caption() {
-		return this._documentSnapshot.get(rhit.FB_KEY_CAPTION);
+	get type() {
+		return this._documentSnapshot.get(rhit.FB_KEY_TYPE_OF_CLOTHING);
 	}
 	get author() {
-		return this._documentSnapshot.get(rhit.FB_KEY_AUTHOR);
+		return this._documentSnapshot.get(rhit.FB_KEY_USER);
 	}
 }
 
@@ -395,7 +373,7 @@ rhit.main = function () {
 	});
 
 
-
+	
 
 }
 
