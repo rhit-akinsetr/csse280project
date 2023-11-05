@@ -7,7 +7,7 @@ rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.FB_KEY_USER = "user";
 
 rhit.fbPhotosManager = null;
-rhit.FbSingleTypeManager = null;
+rhit.FbSingleUrlManager = null;
 rhit.fbAuthManager = null;
 
 
@@ -22,32 +22,45 @@ function htmlToElement(html) {
 rhit.ListPageController = class {
 	constructor() {
 
+		this.clothingItems = {
+			tops: [],
+			bottoms: [],
+			shoes: [],
+			eyewear: [],
+			accessories: []
+		  };
+
 
 		document.querySelector("#menuTops").addEventListener("click", (event) => {
-			console.log("tops");
-			
-			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag1" src="images/shirt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
-			
-		});
-		document.querySelector("#menuBottoms").addEventListener("click", (event) => {
-			console.log("bottoms");
-			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag2" src="images/pants.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
-		});
-		document.querySelector("#menuShoes").addEventListener("click", (event) => {
-			console.log("shoes");
-			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag3" src="images/shoes.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
-		});
-		document.querySelector("#menuEyewear").addEventListener("click", (event) => {
-			console.log("eyewear");
-			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag4" src="images/eyewear.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
-		});
-		document.querySelector("#menuAccessories").addEventListener("click", (event) => {
-			console.log("accessories");
-			document.querySelector("#menuClothingType").innerHTML = '<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag5" src="images/belt.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69"></div>';
-		});
-		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
-			rhit.fbAuthManager.signOut();
-		});
+            console.log("tops");
+            // this.hideAllImages();
+			this.showClothingItems("tops");
+        });
+
+        document.querySelector("#menuBottoms").addEventListener("click", (event) => {
+            console.log("bottoms");
+            // this.hideAllImages();
+			this.showClothingItems("bottoms");
+        });
+
+        document.querySelector("#menuShoes").addEventListener("click", (event) => {
+            console.log("shoes");
+            // this.hideAllImages();
+            this.showClothingItems("shoes");
+        });
+
+        document.querySelector("#menuEyewear").addEventListener("click", (event) => {
+            console.log("eyewear");
+            // this.hideAllImages();
+            this.showClothingItems("eyewear");
+        });
+
+        document.querySelector("#menuAccessories").addEventListener("click", (event) => {
+            console.log("accessories");
+            // this.hideAllImages();
+            this.showClothingItems("accessories");
+        });
+
 
 		document.querySelector("#submitAddPhoto").addEventListener("click", (event) => {
 			const url = document.querySelector("#inputUrl").value;
@@ -76,32 +89,75 @@ rhit.ListPageController = class {
 		//start listening
 		rhit.fbPhotosManager.beginListening(this.updateList.bind(this));
 	}
-	_createCard(picture) {
-		return htmlToElement(` <div class="pin">
-		  <img id="cardPoster" class="img-fluid card-img-bottom" draggable="true" ondragstart="drag(event)" alt="poster" src=${picture.url}>
-         <p class="card-text text-center">${picture.type}</p>
-        </div>`);
+
+		
+		// showImagesByType(type) {
+		// 	const images = document.querySelectorAll(`.pin img[data-type='${type}']`);
+		// 	images.forEach((img) => {
+		// 		img.style.display = "block";
+		// 	});
+		// }
+	
+		_createCard(picture) {
+			const card = htmlToElement(`<div
+			id="draggable-1"
+			class="pin"
+			draggable="true"
+			ondragstart="onDragStart(event);"
+		  >
+			  <img class=class="img-fluid card-img-bottom example-draggable"
+			  draggable="true"
+			  ondragstart="onDragStart(event);" draggable-image" id="image${picture.id}" data-type="${picture.type}" alt="poster" src=${picture.url}>
+			</div>`);
+			// new DraggableImage(card.querySelector('img'));
+			card.addEventListener("dragstart", onDragStart);
+
+			return card;
+		  }
+
+	showClothingItems(category) {
+		const menuClothingType = document.querySelector("#menuClothingType");
+		menuClothingType.innerHTML = ''; 
+	
+		this.clothingItems[category].forEach((item) => {
+			menuClothingType.appendChild(htmlToElement(`
+			<div
+			id="draggable-1"
+			class="pin"
+			draggable="true"
+			ondragstart="onDragStart(event);"
+		  >
+					<img class="img-fluid card-img-bottom" class="example-draggable"
+					draggable="true"
+					ondragstart="onDragStart(event);" draggable="true" ondragstart="drag(event)" alt="poster" src=${item.url}>
+				</div>
+			`));
+		});
 	}
+
+	
 	updateList() {
 		console.log("updating list");
 		const newList = htmlToElement(`<div id='listPageContainer'></div>`);
 		for (let i = 0; i < rhit.fbPhotosManager.length; i++) {
-			const mq = rhit.fbPhotosManager.fbPhotosManager(i);
-			const newCard = this._createCard(mq);
-
-			newCard.onclick = (event) => {
-
-				window.location.href = `/photo.html?id=${mq.id}`
-
-			}
-
-			newList.appendChild(newCard);
+		  const mq = rhit.fbPhotosManager.fbPhotosManager(i);
+		  const newCard = this._createCard(mq);
+	
+		  // Store the clothing item in the corresponding category
+		  this.clothingItems[mq.type].push(mq);
+	
+		  newCard.onclick = (event) => {
+			window.location.href = `/photodetail.html?id=${mq.id}`;
+		  }
+	
+		  newList.appendChild(newCard);
 		}
 		const oldList = document.querySelector("#listPageContainer");
 		oldList.removeAttribute("id");
 		oldList.hidden = true;
 		oldList.parentElement.appendChild(newList);
-	}
+	  }
+	
 }
 
 rhit.PhotoType = class {
@@ -176,42 +232,43 @@ rhit.DetailPageController = class {
 	constructor() {
 		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
 			rhit.fbAuthManager.signOut();
-
 		});
 
-		document.querySelector("#submitDelete").addEventListener("click", (event) => {
+		document.querySelector("#menuEdit").addEventListener("click", (event) => {
+			console.log("Edit button clicked");
+		});
+		
+		document.querySelector("#menuDelete").addEventListener("click", (event) => {
+			console.log("Delete button clicked");
+		});
 
-			rhit.FbSingleCaptionManager.delete().then(function () {
+
+		document.querySelector("#submitDeletePhoto").addEventListener("click", (event) => {
+
+			rhit.FbSingleUrlManager.delete().then(function () {
 				console.log("document sucessfully deleted:")
-				window.location.href = "/";
+				window.location.href = "/outfit.html";
 			}).catch(function (error) {
 				console.error("Error removing document: ", error);
 			});
-		})
+		});
 
-		rhit.FbSingleCaptionManager.beginListening(this.updateView.bind(this));
+		rhit.FbSingleUrlManager.beginListening(this.updateView.bind(this));
 	}
 	updateView() {
+		document.querySelector("#cardPhoto").src = rhit.FbSingleUrlManager.url;
 
-
-		document.querySelector("#cardUrl").src = rhit.FbSingleCaptionManager.url;
-		document.querySelector("#cardCaption").innerHTML = rhit.FbSingleCaptionManager.caption;
-
-		if (rhit.FbSingleCaptionManager.author == rhit.fbAuthManager.uid) {
+		if (rhit.FbSingleUrlManager.author == rhit.FbAuthManager.uid) {
 			document.querySelector("#menuEdit").style.display = "flex";
-
 			document.querySelector("#menuDelete").style.display = "flex";
-
 		}
-
-
 	}
 }
 
 rhit.LoginPageController = class {
 	constructor() {
 		document.querySelector("#rosefireButton").onclick = (event) => {
-			rhit.fbAuthManager.signIn();
+			rhit.FbAuthManager.signIn();
 
 		};
 	}
@@ -274,7 +331,7 @@ rhit.FbAuthManager = class {
 	}
 }
 
-rhit.FbSingleTypeManager = class {
+rhit.FbSingleUrlManager = class {
 	constructor(photoID) {
 		this._documentSnapshot = {};
 		this._unsubscribe = null;
@@ -282,22 +339,16 @@ rhit.FbSingleTypeManager = class {
 		console.log(`listening to ${this._ref.path}`);
 	}
 
-	 
-
 	beginListening(changeListener) {
-
-
 		this._unsubscribe = this._ref.onSnapshot((doc) => {
 			if (doc.exists) {
-				console.log("Document data:", doc.data)
+				console.log("Document data:", doc.data);
 				this._documentSnapshot = doc;
 				changeListener();
 			} else {
 				console.log("no such document");
 			}
 		});
-
-
 
 	}
 	stopListening() {
@@ -320,8 +371,6 @@ rhit.FbSingleTypeManager = class {
 }
 
 
-
-
 rhit.checkForRedirects = function () {
 
 	if (document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn) {
@@ -342,25 +391,20 @@ rhit.initalizePage = function () {
 		rhit.fbPhotosManager = new rhit.FbPhotosManager(uid);
 		new rhit.ListPageController();
 	}
-	if (document.querySelector("#detailPage")) {
-
-
-
-		const photoID = urlParams.get("id");
-
-		console.log(`Detail page is for ${photoID}`);
-		if (!photoID) {
-			console.log("ERROR: missing picture caption id");
+	if (document.querySelector("#photodetail")) {
+		const url = urlParams.get("id");
+		if (!url) {
 			window.location.href = "/";
 		}
-		rhit.FbSingleCaptionManager = new rhit.FbSingleCaptionManager(photoID);
+		rhit.FbSingleUrlManager = new rhit.FbSingleUrlManager(url);
 		new rhit.DetailPageController();
-
 	}
 	if (document.querySelector("#loginPage")) {
+		console.log("You are on the Login Page");
 		new rhit.LoginPageController();
 		rhit.startFirebaseUI();
 	}
+	
 
 }
 
@@ -396,6 +440,23 @@ rhit.startFirebaseUI = function () {
 
 }
 
+// class DraggableImage {
+// 	constructor(imgElement) {
+// 	  this.imgElement = imgElement;
+// 	  this.imgElement.setAttribute('draggable', true);
+// 	  this.imgElement.addEventListener('dragstart', this.onDragStart.bind(this));
+// 	}
+  
+// 	onDragStart(event) {
+// 	  event.dataTransfer.setData('text/plain', this.imgElement.id);
+// 	}
+//   }
+
+function onDragStart(event) {
+	event.dataTransfer.setData("text/plain", event.target.id);
+	event.target.style.opacity = "0.5";
+  }
+
 function allowDrop(ev) {
 	ev.preventDefault();
 }
@@ -426,6 +487,10 @@ function onDrop(event) {
 		.dataTransfer
 		.clearData();
 }
+
+function onDragOver(event) {
+	event.preventDefault();
+  }
 
 
 rhit.main();

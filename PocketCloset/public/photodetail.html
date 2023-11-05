@@ -1,19 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <title>My Pocket Closet</title>
 </head>
-
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="/list.html">Photo Bucket</a>
+    <a class="navbar-brand" href="/outfit.html">My Pocket Closet</a>
     <div class="dropdown pull-xs-right">
       <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <i class="material-icons">more_vert</i>
@@ -22,7 +20,7 @@
         <button id="menuEdit" class="dropdown-item" type="button" data-toggle="modal" data-target="#editCaptionDialog">
           <i class="material-icons">edit</i>
           &nbsp;&nbsp;&nbsp;Edit</button>
-        <button id="menuDelete" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteCaptionDialong">
+        <button id="menuDelete" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteCaptionDialog">
           <i class="material-icons">delete</i>
           &nbsp;&nbsp;&nbsp;Delete</button>
         <button id = "menuSignOut" class="dropdown-item" type="button" >
@@ -31,6 +29,7 @@
       </div>
     </div>
   </nav>
+  
   <div id="photodetail" class="container page-container">
     <div class="card">
       <img id="cardPhoto" src="" alt="">
@@ -38,6 +37,7 @@
         <h6 id="cardCaption" class="card-subtitle mb-2 text-muted">Loading...</h6>
       </div>
     </div>
+   
     <!-- Modal -->
     <div class="modal fade" id="editCaptionDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="deleteCaptionDialong" tabindex="-1" role="dialog">
+    <div class="modal fade" id="deleteCaptionDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">

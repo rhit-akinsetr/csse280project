@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <title>My Photo Bucket</title>
+  <title>My Pocket Closet</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
           <span class="sr-only">Toggle drawer</span>
           <i class="material-icons">menu</i>
         </button>
-        <a class="navbar-brand" href="#">&nbsp;&nbsp;My Photo Bucket</a>
+        <a class="navbar-brand" href="#">&nbsp;&nbsp;My Pocket Closet</a>
 
     </header>
 
@@ -50,8 +50,13 @@
       
       <div class="row">
       <!-- Shirt -->
-      <h3>Drag your Outfit</h3>
-      <div class="col" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      
+        <div
+        class="col"
+        id = "div1"
+        ondragover="onDragOver(event);"
+        ondrop="onDrop(event);"
+      ><h3>Drag your Outfit</h3></div>
       </div>
     </div>
 
