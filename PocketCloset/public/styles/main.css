@@ -33,6 +33,10 @@ body {
     flex-direction: row;
 }
 
+#listPageContainer{
+    display: none;
+}
+
 #columns {
     column-count: 3;
     column-gap: 5px;
@@ -76,6 +80,9 @@ body {
     left: -130px;
 }
 
+
+
+
 .bmd-layout-content {
     height: 100vh;
     /* width: 50000vh; */
@@ -106,9 +113,18 @@ body {
     border-radius: 5px;
 }
 
+#div1{
+    width: auto;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
 
+#menuClothingType{
+    border: black;
+    border-width: 10px;
+}
 
-#div1,
 #div2,
 #div3,
 #div4,

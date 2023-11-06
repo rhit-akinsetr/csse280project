@@ -99,39 +99,44 @@ rhit.ListPageController = class {
 		// }
 	
 		_createCard(picture) {
-			const card = htmlToElement(`<div
-			id="draggable-1"
-			class="pin"
-			draggable="true"
-			ondragstart="onDragStart(event);"
-		  >
-			  <img class=class="img-fluid card-img-bottom example-draggable"
+			const card = htmlToElement(`<img
 			  draggable="true"
-			  ondragstart="onDragStart(event);" draggable-image" id="image${picture.id}" data-type="${picture.type}" alt="poster" src=${picture.url}>
-			</div>`);
+			  ondragstart="drag(event)" id="image${picture.id}" data-type="${picture.type}" alt="poster" src="${picture.url}">
+			`);
 			// new DraggableImage(card.querySelector('img'));
 			card.addEventListener("dragstart", onDragStart);
 
 			return card;
 		  }
 
+		  createCategoryCard(item){
+			
+			const card =htmlToElement(`
+				<div
+				id="draggable-1"
+				class="pin"
+				draggable="true"
+				ondragstart="drag(event)"
+			  >
+						<img 
+						draggable="true"
+						ondragstart="drag(event)" id="image${item.id}" data-type="${item.type}" alt="poster" src=${item.url}>
+					</div>
+				`);
+				card.onclick= (event) => {
+					window.location.href = `/photodetail.html?id=${item.id}`;
+				}  
+				return card;
+			}
+			
+		  
+
 	showClothingItems(category) {
 		const menuClothingType = document.querySelector("#menuClothingType");
 		menuClothingType.innerHTML = ''; 
 	
 		this.clothingItems[category].forEach((item) => {
-			menuClothingType.appendChild(htmlToElement(`
-			<div
-			id="draggable-1"
-			class="pin"
-			draggable="true"
-			ondragstart="onDragStart(event);"
-		  >
-					<img class="img-fluid card-img-bottom" class="example-draggable"
-					draggable="true"
-					ondragstart="onDragStart(event);" draggable="true" ondragstart="drag(event)" alt="poster" src=${item.url}>
-				</div>
-			`));
+			menuClothingType.appendChild(this.createCategoryCard(item));
 		});
 	}
 
@@ -468,29 +473,20 @@ function drag(ev) {
 function drop(ev) {
 	ev.preventDefault();
 	var data = ev.dataTransfer.getData("text");
+	console.log(data);
+	console.log(ev.target);
 	ev.target.appendChild(document.getElementById(data));
 }
 
-function onDragStart(event) {
-	event
-		.dataTransfer
-		.setData('text/plain', event.target.id);
+// function onDrop(event) {
+// 	event
+// 		.dataTransfer
+// 		.clearData();
+// }
 
-	event
-		.currentTarget
-		.style
-		.backgroundColor = 'yellow';
-}
-
-function onDrop(event) {
-	event
-		.dataTransfer
-		.clearData();
-}
-
-function onDragOver(event) {
-	event.preventDefault();
-  }
+// function onDragOver(event) {
+// 	event.preventDefault();
+//   }
 
 
 rhit.main();

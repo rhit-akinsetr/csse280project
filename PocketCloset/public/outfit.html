@@ -38,25 +38,22 @@
         <a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a>
         <a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a>
         <a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
-        <div id="menuClothingType"></div>
+        <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
       </ul>
-    <!-- </div> -->
+    </div>
 
-
+    <h3>Drag your Outfit</h3>
     <div id="listPage" class="container page-container image-fluid">
-
+      <aside>
       <div id="listPageContainer"></div>
+      </aside>
+
       <div class="flex-grid">
       
       <div class="row">
       <!-- Shirt -->
       
-        <div
-        class="col"
-        id = "div1"
-        ondragover="onDragOver(event);"
-        ondrop="onDrop(event);"
-      ><h3>Drag your Outfit</h3></div>
+      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       </div>
     </div>
 
@@ -105,14 +102,7 @@
         </div>
       </div>
     </div>
-    <!-- <main class="bmd-layout-content"> -->
-      <!-- <div id="listPage" class="container page-container">
-
-        <div id="listContainer">
-
-
-        </div> -->
-    </main>
+    
   </div>
   </div>
   <script src="scripts/jquery.min.js"></script>
