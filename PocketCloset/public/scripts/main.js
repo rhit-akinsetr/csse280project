@@ -247,6 +247,19 @@ rhit.DetailPageController = class {
 			console.log("Delete button clicked");
 		});
 
+		document.querySelector("#submitEditCaption").onclick = (event) => {
+			const url = document.querySelector("#inputCaption").value;
+			rhit.FbSingleUrlManager.update(url);
+		};
+
+		$("#editCaption").on("shown.bs.modal", (event) => {
+			document.querySelector("#inputCaption").focus();
+		})
+
+		$("#editCaption").on("show.bs.modal", (event) => {
+			document.querySelector("#inputCaption").value = rhit.FbSingleUrlManager.caption;
+		})
+
 
 		document.querySelector("#submitDeletePhoto").addEventListener("click", (event) => {
 
@@ -355,6 +368,20 @@ rhit.FbSingleUrlManager = class {
 			}
 		});
 
+	}
+
+	update(url) {
+		this._ref.update({
+
+			[rhit.FB_KEY_URL]:url,
+			[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+		})
+		.then(() =>{
+			console.log("Document Successfully updated");
+		})
+		.catch(function(error){
+			console.log("Error updating document", error);
+		})
 	}
 	stopListening() {
 		this._unsubscribe();
