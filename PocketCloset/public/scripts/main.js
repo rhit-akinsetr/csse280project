@@ -28,50 +28,50 @@ rhit.ListPageController = class {
 			shoes: [],
 			eyewear: [],
 			accessories: []
-		  };
+		};
 
 
 		document.querySelector("#menuTops").addEventListener("click", (event) => {
-            console.log("tops");
-            // this.hideAllImages();
+			console.log("tops");
+			// this.hideAllImages();
 			this.showClothingItems("tops");
-        });
+		});
 
-        document.querySelector("#menuBottoms").addEventListener("click", (event) => {
-            console.log("bottoms");
-            // this.hideAllImages();
+		document.querySelector("#menuBottoms").addEventListener("click", (event) => {
+			console.log("bottoms");
+			// this.hideAllImages();
 			this.showClothingItems("bottoms");
-        });
+		});
 
-        document.querySelector("#menuShoes").addEventListener("click", (event) => {
-            console.log("shoes");
-            // this.hideAllImages();
-            this.showClothingItems("shoes");
-        });
+		document.querySelector("#menuShoes").addEventListener("click", (event) => {
+			console.log("shoes");
+			// this.hideAllImages();
+			this.showClothingItems("shoes");
+		});
 
-        document.querySelector("#menuEyewear").addEventListener("click", (event) => {
-            console.log("eyewear");
-            // this.hideAllImages();
-            this.showClothingItems("eyewear");
-        });
+		document.querySelector("#menuEyewear").addEventListener("click", (event) => {
+			console.log("eyewear");
+			// this.hideAllImages();
+			this.showClothingItems("eyewear");
+		});
 
-        document.querySelector("#menuAccessories").addEventListener("click", (event) => {
-            console.log("accessories");
-            // this.hideAllImages();
-            this.showClothingItems("accessories");
-        });
+		document.querySelector("#menuAccessories").addEventListener("click", (event) => {
+			console.log("accessories");
+			// this.hideAllImages();
+			this.showClothingItems("accessories");
+		});
 
 
 		document.querySelector("#submitAddPhoto").addEventListener("click", (event) => {
 			const url = document.querySelector("#inputUrl").value;
 			const rButtons = document.getElementsByName("type");
 			let type = rButtons[0];
-			for( let i = 0; i<rButtons.length; i++){
-				if(rButtons[i].checked){
+			for (let i = 0; i < rButtons.length; i++) {
+				if (rButtons[i].checked) {
 					type = (rButtons[i].value);
 				}
 			}
-			
+
 			rhit.fbPhotosManager.add(url, type);
 		})
 
@@ -90,28 +90,28 @@ rhit.ListPageController = class {
 		rhit.fbPhotosManager.beginListening(this.updateList.bind(this));
 	}
 
-		
-		// showImagesByType(type) {
-		// 	const images = document.querySelectorAll(`.pin img[data-type='${type}']`);
-		// 	images.forEach((img) => {
-		// 		img.style.display = "block";
-		// 	});
-		// }
-	
-		_createCard(picture) {
-			const card = htmlToElement(`<img
+
+	// showImagesByType(type) {
+	// 	const images = document.querySelectorAll(`.pin img[data-type='${type}']`);
+	// 	images.forEach((img) => {
+	// 		img.style.display = "block";
+	// 	});
+	// }
+
+	_createCard(picture) {
+		const card = htmlToElement(`<img
 			  draggable="true"
 			  ondragstart="drag(event)" id="image${picture.id}" data-type="${picture.type}" alt="poster" src="${picture.url}">
 			`);
-			// new DraggableImage(card.querySelector('img'));
-			card.addEventListener("dragstart", onDragStart);
+		// new DraggableImage(card.querySelector('img'));
+		card.addEventListener("dragstart", onDragStart);
 
-			return card;
-		  }
+		return card;
+	}
 
-		  createCategoryCard(item){
-			
-			const card =htmlToElement(`
+	createCategoryCard(item) {
+
+		const card = htmlToElement(`
 				<div
 				id="draggable-1"
 				class="pin"
@@ -123,46 +123,46 @@ rhit.ListPageController = class {
 						ondragstart="drag(event)" id="image${item.id}" data-type="${item.type}" alt="poster" src=${item.url}>
 					</div>
 				`);
-				card.onclick= (event) => {
-					window.location.href = `/photodetail.html?id=${item.id}`;
-				}  
-				return card;
-			}
-			
-		  
+		card.onclick = (event) => {
+			window.location.href = `/photodetail.html?id=${item.id}`;
+		}
+		return card;
+	}
+
+
 
 	showClothingItems(category) {
 		const menuClothingType = document.querySelector("#menuClothingType");
-		menuClothingType.innerHTML = ''; 
-	
+		menuClothingType.innerHTML = '';
+
 		this.clothingItems[category].forEach((item) => {
 			menuClothingType.appendChild(this.createCategoryCard(item));
 		});
 	}
 
-	
+
 	updateList() {
 		console.log("updating list");
 		const newList = htmlToElement(`<div id='listPageContainer'></div>`);
 		for (let i = 0; i < rhit.fbPhotosManager.length; i++) {
-		  const mq = rhit.fbPhotosManager.fbPhotosManager(i);
-		  const newCard = this._createCard(mq);
-	
-		  // Store the clothing item in the corresponding category
-		  this.clothingItems[mq.type].push(mq);
-	
-		  newCard.onclick = (event) => {
-			window.location.href = `/photodetail.html?id=${mq.id}`;
-		  }
-	
-		  newList.appendChild(newCard);
+			const mq = rhit.fbPhotosManager.fbPhotosManager(i);
+			const newCard = this._createCard(mq);
+
+			// Store the clothing item in the corresponding category
+			this.clothingItems[mq.type].push(mq);
+
+			newCard.onclick = (event) => {
+				window.location.href = `/photodetail.html?id=${mq.id}`;
+			}
+
+			newList.appendChild(newCard);
 		}
 		const oldList = document.querySelector("#listPageContainer");
 		oldList.removeAttribute("id");
 		oldList.hidden = true;
 		oldList.parentElement.appendChild(newList);
-	  }
-	
+	}
+
 }
 
 rhit.PhotoType = class {
@@ -242,7 +242,7 @@ rhit.DetailPageController = class {
 		document.querySelector("#menuEdit").addEventListener("click", (event) => {
 			console.log("Edit button clicked");
 		});
-		
+
 		document.querySelector("#menuDelete").addEventListener("click", (event) => {
 			console.log("Delete button clicked");
 		});
@@ -373,15 +373,15 @@ rhit.FbSingleUrlManager = class {
 	update(url) {
 		this._ref.update({
 
-			[rhit.FB_KEY_URL]:url,
-			[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		})
-		.then(() =>{
-			console.log("Document Successfully updated");
-		})
-		.catch(function(error){
-			console.log("Error updating document", error);
-		})
+				[rhit.FB_KEY_URL]: url,
+				[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+			})
+			.then(() => {
+				console.log("Document Successfully updated");
+			})
+			.catch(function (error) {
+				console.log("Error updating document", error);
+			})
 	}
 	stopListening() {
 		this._unsubscribe();
@@ -436,20 +436,33 @@ rhit.initalizePage = function () {
 		new rhit.LoginPageController();
 		rhit.startFirebaseUI();
 	}
-	
+
 
 }
 
 
 rhit.main = function () {
+	let options = {
+		method: "GET"
+	}
+	fetch(`http://api.weatherapi.com/v1/current.json?key=4aeec13c77df45718cb234051230711&q=terre haute&aqi=yes`, options)
+		.then(response => response.json())
+		.then(json => {
+			console.log(json)
+		})
+		
+	// .catch(err => console.log("wrong city name"));
+
+
 	rhit.fbAuthManager = new rhit.FbAuthManager();
 	rhit.fbAuthManager.beginListening((event) => {
 		rhit.checkForRedirects();
 		rhit.initalizePage();
+		rhit.weather();
 	});
 
 
-	
+
 
 }
 
@@ -478,7 +491,7 @@ rhit.startFirebaseUI = function () {
 // 	  this.imgElement.setAttribute('draggable', true);
 // 	  this.imgElement.addEventListener('dragstart', this.onDragStart.bind(this));
 // 	}
-  
+
 // 	onDragStart(event) {
 // 	  event.dataTransfer.setData('text/plain', this.imgElement.id);
 // 	}
@@ -487,7 +500,7 @@ rhit.startFirebaseUI = function () {
 function onDragStart(event) {
 	event.dataTransfer.setData("text/plain", event.target.id);
 	event.target.style.opacity = "0.5";
-  }
+}
 
 function allowDrop(ev) {
 	ev.preventDefault();
@@ -503,6 +516,17 @@ function drop(ev) {
 	console.log(data);
 	console.log(ev.target);
 	ev.target.appendChild(document.getElementById(data));
+}
+
+rhit.weather = function () {
+	let inputText;
+	let cityName = prompt("Please enter your city name:", "Harry Potter");
+	if (cityName == null || cityName == "") {
+	  inputText = "User cancelled the prompt.";
+	} else {
+	  inputText = "The weather is {temperature}" + " in " + cityName;
+	}
+	document.getElementById("weather").innerHTML = inputText;
 }
 
 // function onDrop(event) {
