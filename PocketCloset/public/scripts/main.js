@@ -406,7 +406,7 @@ rhit.FbSingleUrlManager = class {
 rhit.checkForRedirects = function () {
 
 	if (document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn) {
-		window.location.href = "/outfit.html";
+		window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`;
 	}
 
 	if (!document.querySelector("#loginPage") && !(rhit.fbAuthManager.isSignedIn)) {
@@ -442,15 +442,7 @@ rhit.initalizePage = function () {
 
 
 rhit.main = function () {
-	let options = {
-		method: "GET"
-	}
-	fetch(`http://api.weatherapi.com/v1/current.json?key=4aeec13c77df45718cb234051230711&q=terre haute&aqi=yes`, options)
-		.then(response => response.json())
-		.then(json => {
-			console.log(json)
-		})
-		
+	
 	// .catch(err => console.log("wrong city name"));
 
 
@@ -519,14 +511,23 @@ function drop(ev) {
 }
 
 rhit.weather = function () {
-	let inputText;
-	let cityName = prompt("Please enter your city name:", "Harry Potter");
-	if (cityName == null || cityName == "") {
-	  inputText = "User cancelled the prompt.";
-	} else {
-	  inputText = "The weather is {temperature}" + " in " + cityName;
-	}
-	document.getElementById("weather").innerHTML = inputText;
+	// Weather API Stuff
+	fetch(`http://cors-anywhere.api.weatherapi.com/v1/current.json?key=4aeec13c77df45718cb234051230711&q=terre haute&aqi=yes`)
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+
+		})
+		
+		
+	// let inputText;
+	// let cityName = prompt("Please enter your city name:");
+	// if (cityName == null || cityName == "") {
+	//   inputText = "User cancelled the prompt.";
+	// } else {
+	//   inputText = "The weather is {temperature}" + " in " + cityName;
+	// }
+	// document.getElementById("weather").innerHTML = inputText;
 }
 
 // function onDrop(event) {
