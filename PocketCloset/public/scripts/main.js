@@ -265,7 +265,7 @@ rhit.DetailPageController = class {
 
 			rhit.FbSingleUrlManager.delete().then(function () {
 				console.log("document sucessfully deleted:")
-				window.location.href = "/outfit.html";
+				window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`;
 			}).catch(function (error) {
 				console.error("Error removing document: ", error);
 			});
@@ -426,7 +426,7 @@ rhit.initalizePage = function () {
 	if (document.querySelector("#photodetail")) {
 		const url = urlParams.get("id");
 		if (!url) {
-			window.location.href = "/";
+			window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`;
 		}
 		rhit.FbSingleUrlManager = new rhit.FbSingleUrlManager(url);
 		new rhit.DetailPageController();
@@ -453,7 +453,9 @@ rhit.main = function () {
 		rhit.weather();
 	});
 
-
+	document.addEventListener('DOMContentLoaded', function() {
+		navigateToSpecificLink();
+	  });
 
 
 }
@@ -488,6 +490,14 @@ rhit.startFirebaseUI = function () {
 // 	  event.dataTransfer.setData('text/plain', this.imgElement.id);
 // 	}
 //   }
+
+function navigateToSpecificLink() {
+	var navbarBrand = document.querySelector('.navbar-brand');
+  
+	navbarBrand.addEventListener('click', function() {
+	  window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`; 
+	});
+  }
 
 function onDragStart(event) {
 	event.dataTransfer.setData("text/plain", event.target.id);

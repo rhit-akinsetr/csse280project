@@ -15,12 +15,12 @@
   <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
     <header class="bmd-layout-header">
       <div class="navbar navbar-dark bg-faded justify-content-start">
-        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-controls="dw-s2"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle drawer</span>
-          <i class="material-icons">menu</i>
-        </button>
-        <a class="navbar-brand" href="#">&nbsp;&nbsp;My Pocket Closet</a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-controls="dw-s2" -->
+          <!-- aria-expanded="false" aria-label="Toggle navigation"> -->
+          <!-- <span class="sr-only">Toggle drawer</span> -->
+          <!-- <i class="material-icons">menu</i> -->
+        <!-- </button> -->
+        <a class="navbar-brand">&nbsp;&nbsp;My Pocket Closet</a>
         <div id="weather"></div>
 
     </header>
@@ -42,9 +42,10 @@
         <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
       </ul>
     </div>
+  
 
-    <h3>Drag your Outfit</h3>
-    <div id="listPage" class="container page-container image-fluid">
+    <h3 id ="instructions" class="text-center">Drag your Outfit</h3>
+    <div id="listPage" class="d-flex justify-content-center">
       <aside>
       <div id="listPageContainer"></div>
       </aside>
@@ -54,8 +55,9 @@
       <div class="row">
       <!-- Shirt -->
       
-      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div class="text-center" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       </div>
+    </div>
     </div>
 
 
@@ -104,7 +106,7 @@
       </div>
     </div>
     
-  </div>
+  
   </div>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
