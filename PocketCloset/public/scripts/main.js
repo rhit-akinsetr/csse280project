@@ -521,23 +521,22 @@ function drop(ev) {
 }
 
 rhit.weather = function () {
-	// Weather API Stuff
-	fetch(`https://cors-anywhere.herokuapp.com/http://cors-anywhere.api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=terre haute&aqi=yes`)
+	let cityName = prompt("Please enter your city name");
+	if (cityName == null || cityName == "") {
+		document.getElementById("weather").innerHTML = "";
+	  } else {
+		fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${cityName}&aqi=yes`)
 		.then(response => response.json())
 		.then(data => {
-			console.log(data)
-
+			const temperature = Math.round(data['current']['temp_f']);
+			const inputText = `${temperature}°F in ${cityName}`;
+			document.getElementById("weather").innerHTML = inputText;
 		})
-		
-		
-	// let inputText;
-	// let cityName = prompt("Please enter your city name:");
-	// if (cityName == null || cityName == "") {
-	//   inputText = "User cancelled the prompt.";
-	// } else {
-	//   inputText = "The weather is {temperature}" + " in " + cityName;
-	// }
-	// document.getElementById("weather").innerHTML = inputText;
+		.catch(error => {
+			console.error("Error fetching weather data:", error);
+			document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
+		});
+	  }
 }
 
 // function onDrop(event) {
