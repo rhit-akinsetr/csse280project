@@ -512,7 +512,7 @@ function drop(ev) {
 
 rhit.weather = function () {
 	// Weather API Stuff
-	fetch(`http://cors-anywhere.api.weatherapi.com/v1/current.json?key=4aeec13c77df45718cb234051230711&q=terre haute&aqi=yes`)
+	fetch(`https://cors-anywhere.herokuapp.com/http://cors-anywhere.api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=terre haute&aqi=yes`)
 		.then(response => response.json())
 		.then(data => {
 			console.log(data)
