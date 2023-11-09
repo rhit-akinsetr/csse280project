@@ -527,6 +527,11 @@ function drop(ev) {
 	ev.target.appendChild(document.getElementById(data));
 }
 
+function clearBox() {
+	var div1 = document.getElementById("div1");
+	div1.innerHTML = "";
+}
+
 rhit.weather = function () {
 	document.getElementById("searchButton").addEventListener("click", function () {
 		const cityInput = document.getElementById("cityInput");
