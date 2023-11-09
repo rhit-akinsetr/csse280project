@@ -168,3 +168,15 @@ body {
     flex-wrap: wrap;
     width: 10%;
 }
+
+/* #menuTops, 
+#menuBottoms, 
+#menuShoes, 
+#menuEyewear, 
+#menuAccessories{
+    border: 2px solid #D2B48C;
+    padding: 5px;
+    text-decoration: none;
+    width: 30%;
+    box-sizing: border-box;
+} */

@@ -16,102 +16,111 @@
     <header class="bmd-layout-header">
       <div class="navbar navbar-dark bg-faded justify-content-start">
         <!-- <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-controls="dw-s2" -->
-          <!-- aria-expanded="false" aria-label="Toggle navigation"> -->
-          <!-- <span class="sr-only">Toggle drawer</span> -->
-          <!-- <i class="material-icons">menu</i> -->
+        <!-- aria-expanded="false" aria-label="Toggle navigation"> -->
+        <!-- <span class="sr-only">Toggle drawer</span> -->
+        <!-- <i class="material-icons">menu</i> -->
         <!-- </button> -->
         <a class="navbar-brand">&nbsp;&nbsp;My Pocket Closet</a>
-        
+        <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true">
+          <i class="material-icons">more_vert</i>
+          <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
+          <div class="ripple-container"></div>
+        </button>
 
-        <div class="container d-flex justify-content-end">
-          <div id="weather"></div>
-        </div>
-        
+
+          <div class="container d-flex justify-content-end">
+            <div id="weather"></div>
+          </div>
+
 
     </header>
 
     <div id="dw-s2" class="bmd-layout-drawer bg-faded">
-      
+
       <header>
         <a class="navbar-brand">My Photo Bucket</a>
       </header>
       <main>
-      <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
-      </div>
-      <ul class="list-group">
-        <a id="menuTops" class="list-group-item"><i class="material-icons">person</i>Show My Tops</a>
-        <a id="menuBottoms" class="list-group-item"><i class="material-icons">people</i>Show My Bottoms</a>
-        <a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a>
-        <a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a>
-        <a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
-        <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
-      </ul>
     </div>
-  
+    <ul class="list-group">
+      <li><a id="menuTops" class="list-group-item"><i class="material-icons">people</i>Show My Tops</a></li>
+      <li><a id="menuBottoms" class="list-group-item"><i class="material-icons">people</i>Show My Bottoms</a></li>
+      <li><a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a></li>
+      <li><a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a></li>
+      <li><a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
+      </li>
+      <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
+    </ul>
+  </div>
 
-    <h3 id ="instructions" class="text-center">Drag your Outfit</h3>
-    <div id="listPage" class="d-flex justify-content-center">
-      <aside>
+
+  <h3 id="instructions" class="text-center">Drag your Outfit</h3>
+  <div id="listPage" class="d-flex justify-content-center">
+    <aside>
       <div id="listPageContainer"></div>
-      </aside>
+    </aside>
 
-      <div class="flex-grid">
-      
+    <div class="flex-grid">
+
       <div class="row">
-      <!-- Shirt -->
-      
-      <div class="text-center" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <!-- Shirt -->
+
+        <div class="text-center" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       </div>
     </div>
-    </div>
+  </div>
 
 
 
 
 
-    <button id="fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#addDialog">
-      <i class="material-icons">add</i>
-    </button>
+  <button id="fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#addDialog">
+    <i class="material-icons">add</i>
+  </button>
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="add caption dialog"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Add Clothing with Description</h5>
+  <!-- Modal -->
+  <div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="add caption dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Clothing with Description</h5>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group bmd-form-group img-fluid">
+            <label for="inputUrl">url</label>
+            <input type="text" class="form-control" id="inputUrl">
           </div>
-          <div class="modal-body">
-
-            <div class="form-group bmd-form-group img-fluid">
-              <label for="inputUrl">url</label>
-              <input type="text" class="form-control" id="inputUrl">
-            </div>
-            <div class="form-group bmd-form-group img-fluid">
-              <label for="inputCaption">Type:</label>
-              <!-- <input type="text" class="form-control" id="inputCaption"> -->
-              <!-- <span class="bmd-help">enter the type of clothing</span> -->
-              <form>
+          <div class="form-group bmd-form-group img-fluid">
+            <label for="inputCaption">Type:</label>
+            <!-- <input type="text" class="form-control" id="inputCaption"> -->
+            <!-- <span class="bmd-help">enter the type of clothing</span> -->
+            <form>
               <input id="topsOption" type="radio" value="tops" name="type"><label for="tops">Tops</label></input>
-              <input id="bottomOption" type="radio" value="bottoms" name="type"><label for="bottoms">Bottoms</label></input>
+              <input id="bottomOption" type="radio" value="bottoms" name="type"><label
+                for="bottoms">Bottoms</label></input>
               <input id="shoesOption" type="radio" value="shoes" name="type"><label for="shoes">Shoes</label></input>
-              <input id="eyewearOption" type="radio" value="eyewear" name="type"><label for="eyewear">Eyewear</label></input>
-              <div><input id="accessoriesOption" type="radio" value="accessories" name="type"><label for="accessories">Accessories</label></input></div>
-            </div>
+              <input id="eyewearOption" type="radio" value="eyewear" name="type"><label
+                for="eyewear">Eyewear</label></input>
+              <div><input id="accessoriesOption" type="radio" value="accessories" name="type"><label
+                  for="accessories">Accessories</label></input></div>
+          </div>
           </form>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-            <button id="submitAddPhoto" type="button" class="btn btn-primary" data-dismiss="modal">CREATE</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          <button id="submitAddPhoto" type="button" class="btn btn-primary" data-dismiss="modal">CREATE</button>
         </div>
       </div>
     </div>
-    
-  
+  </div>
+
+
   </div>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>

@@ -9,7 +9,7 @@ rhit.FB_KEY_USER = "user";
 rhit.fbPhotosManager = null;
 rhit.FbSingleUrlManager = null;
 rhit.fbAuthManager = null;
-
+let weatherFetched = false;
 
 function htmlToElement(html) {
 	var template = document.createElement('template');
@@ -450,7 +450,10 @@ rhit.main = function () {
 	rhit.fbAuthManager.beginListening((event) => {
 		rhit.checkForRedirects();
 		rhit.initalizePage();
-		rhit.weather();
+		if(!weatherFetched){
+			rhit.weather();
+			weatherFetched = true;
+		}
 	});
 
 	document.addEventListener('DOMContentLoaded', function() {
