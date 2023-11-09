@@ -1,5 +1,7 @@
 var rhit = rhit || {};
 
+// Authors: Ethan Pabbathi & Temi Akinselure
+
 rhit.FB_COLLECTION_CLOTHING = "Clothing";
 rhit.FB_KEY_URL = "url";
 rhit.FB_KEY_TYPE_OF_CLOTHING = "type";
@@ -33,31 +35,26 @@ rhit.ListPageController = class {
 
 		document.querySelector("#menuTops").addEventListener("click", (event) => {
 			console.log("tops");
-			// this.hideAllImages();
 			this.showClothingItems("tops");
 		});
 
 		document.querySelector("#menuBottoms").addEventListener("click", (event) => {
 			console.log("bottoms");
-			// this.hideAllImages();
 			this.showClothingItems("bottoms");
 		});
 
 		document.querySelector("#menuShoes").addEventListener("click", (event) => {
 			console.log("shoes");
-			// this.hideAllImages();
 			this.showClothingItems("shoes");
 		});
 
 		document.querySelector("#menuEyewear").addEventListener("click", (event) => {
 			console.log("eyewear");
-			// this.hideAllImages();
 			this.showClothingItems("eyewear");
 		});
 
 		document.querySelector("#menuAccessories").addEventListener("click", (event) => {
 			console.log("accessories");
-			// this.hideAllImages();
 			this.showClothingItems("accessories");
 		});
 
@@ -79,34 +76,21 @@ rhit.ListPageController = class {
 		})
 
 		$("#addDialog").on("show.bs.modal", (event) => {
-			//pre animation
 			document.querySelector("#inputUrl").value = "";
-			// document.querySelector("#inputCaption").value = "";
 		});
 		$("#addDialog").on("shown.bs.modal", (event) => {
-			//post animation
 			document.querySelector("#inputUrl").focus();
 
 		});
-
-		//start listening
 		rhit.fbPhotosManager.beginListening(this.updateList.bind(this));
 	}
 
-
-	// showImagesByType(type) {
-	// 	const images = document.querySelectorAll(`.pin img[data-type='${type}']`);
-	// 	images.forEach((img) => {
-	// 		img.style.display = "block";
-	// 	});
-	// }
 
 	_createCard(picture) {
 		const card = htmlToElement(`<img
 			  draggable="true"
 			  ondragstart="drag(event)" id="image${picture.id}" data-type="${picture.type}" alt="poster" src="${picture.url}">
 			`);
-		// new DraggableImage(card.querySelector('img'));
 		card.addEventListener("dragstart", onDragStart);
 
 		return card;
@@ -151,7 +135,6 @@ rhit.ListPageController = class {
 			const mq = rhit.fbPhotosManager.fbPhotosManager(i);
 			const newCard = this._createCard(mq);
 
-			// Store the clothing item in the corresponding category
 			this.clothingItems[mq.type].push(mq);
 
 			newCard.onclick = (event) => {
@@ -447,7 +430,7 @@ rhit.initalizePage = function () {
 
 rhit.main = function () {
 
-	// .catch(err => console.log("wrong city name"));
+
 
 
 	rhit.fbAuthManager = new rhit.FbAuthManager();
@@ -486,17 +469,7 @@ rhit.startFirebaseUI = function () {
 
 }
 
-// class DraggableImage {
-// 	constructor(imgElement) {
-// 	  this.imgElement = imgElement;
-// 	  this.imgElement.setAttribute('draggable', true);
-// 	  this.imgElement.addEventListener('dragstart', this.onDragStart.bind(this));
-// 	}
 
-// 	onDragStart(event) {
-// 	  event.dataTransfer.setData('text/plain', this.imgElement.id);
-// 	}
-//   }
 
 function navigateToSpecificLink() {
 	var navbarBrand = document.querySelector('.navbar-brand');
@@ -538,54 +511,27 @@ rhit.weather = function () {
 		const stateInput = document.getElementById("stateInput");
 		const cityName = cityInput.value;
 		const stateName = stateInput.value;
-	  
+
 		if (cityName.trim() === "" || stateName.trim() === "") {
-		  document.getElementById("weather").innerHTML = "";
+			document.getElementById("weather").innerHTML = "";
 		} else {
-		  const location = `${cityName},${stateName}`;
-		  fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${location}&aqi=yes`)
-			.then(response => response.json())
-			.then(data => {
-			  console.log(data);
-			  const temperature = Math.round(data['current']['temp_f']);
-			  const inputText = `${temperature}°F in ${cityName}, ${stateName}`;
-			  document.getElementById("weather").innerHTML = inputText;
-			})
-			.catch(error => {
-			  console.error("Error fetching weather data:", error);
-			  document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
-			});
+			const location = `${cityName},${stateName}`;
+			fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${location}&aqi=yes`)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					const temperature = Math.round(data['current']['temp_f']);
+					const inputText = `${temperature}°F in ${cityName}, ${stateName}`;
+					document.getElementById("weather").innerHTML = inputText;
+				})
+				.catch(error => {
+					console.error("Error fetching weather data:", error);
+					document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
+				});
 		}
-	  });
-	  
+	});
 
-	// let cityName = prompt("Please enter your city name");
-	// if (cityName == null || cityName == "") {
-	// 	document.getElementById("weather").innerHTML = "";
-	//   } else {
-	// 	fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${cityName}&aqi=yes`)
-	// 	.then(response => response.json())
-	// 	.then(data => {
-	// 		const temperature = Math.round(data['current']['temp_f']);
-	// 		const inputText = `${temperature}°F in ${cityName}`;
-	// 		document.getElementById("weather").innerHTML = inputText;
-	// 	})
-	// 	.catch(error => {
-	// 		console.error("Error fetching weather data:", error);
-	// 		document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
-	// 	});
-	//   }
 }
-
-// function onDrop(event) {
-// 	event
-// 		.dataTransfer
-// 		.clearData();
-// }
-
-// function onDragOver(event) {
-// 	event.preventDefault();
-//   }
 
 
 rhit.main();
