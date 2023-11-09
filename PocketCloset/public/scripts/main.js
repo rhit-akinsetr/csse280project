@@ -61,6 +61,9 @@ rhit.ListPageController = class {
 			this.showClothingItems("accessories");
 		});
 
+		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
+			rhit.fbAuthManager.signOut();
+		});
 
 		document.querySelector("#submitAddPhoto").addEventListener("click", (event) => {
 			const url = document.querySelector("#inputUrl").value;
@@ -286,7 +289,7 @@ rhit.DetailPageController = class {
 rhit.LoginPageController = class {
 	constructor() {
 		document.querySelector("#rosefireButton").onclick = (event) => {
-			rhit.FbAuthManager.signIn();
+			rhit.fbAuthManager.signIn();
 
 		};
 	}
@@ -335,9 +338,10 @@ rhit.FbAuthManager = class {
 	}
 
 	signOut() {
-		console.log("signing out");
-		firebase.auth().signOut();
-		console.log("signing out");
+		firebase.auth().signOut().catch((error) => {
+			console.log("Sign out error");
+		});;
+
 	}
 
 
@@ -442,7 +446,7 @@ rhit.initalizePage = function () {
 
 
 rhit.main = function () {
-	
+
 	// .catch(err => console.log("wrong city name"));
 
 
@@ -450,15 +454,15 @@ rhit.main = function () {
 	rhit.fbAuthManager.beginListening((event) => {
 		rhit.checkForRedirects();
 		rhit.initalizePage();
-		if(!weatherFetched){
+		if (!weatherFetched) {
 			rhit.weather();
 			weatherFetched = true;
 		}
 	});
 
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function () {
 		navigateToSpecificLink();
-	  });
+	});
 
 
 }
@@ -496,11 +500,11 @@ rhit.startFirebaseUI = function () {
 
 function navigateToSpecificLink() {
 	var navbarBrand = document.querySelector('.navbar-brand');
-  
-	navbarBrand.addEventListener('click', function() {
-	  window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`; 
+
+	navbarBrand.addEventListener('click', function () {
+		window.location.href = `/outfit.html?uid=${rhit.fbAuthManager.uid}`;
 	});
-  }
+}
 
 function onDragStart(event) {
 	event.dataTransfer.setData("text/plain", event.target.id);
@@ -524,22 +528,48 @@ function drop(ev) {
 }
 
 rhit.weather = function () {
-	let cityName = prompt("Please enter your city name");
-	if (cityName == null || cityName == "") {
-		document.getElementById("weather").innerHTML = "";
-	  } else {
-		fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${cityName}&aqi=yes`)
-		.then(response => response.json())
-		.then(data => {
-			const temperature = Math.round(data['current']['temp_f']);
-			const inputText = `${temperature}°F in ${cityName}`;
-			document.getElementById("weather").innerHTML = inputText;
-		})
-		.catch(error => {
-			console.error("Error fetching weather data:", error);
-			document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
-		});
-	  }
+	document.getElementById("searchButton").addEventListener("click", function () {
+		const cityInput = document.getElementById("cityInput");
+		const stateInput = document.getElementById("stateInput");
+		const cityName = cityInput.value;
+		const stateName = stateInput.value;
+	  
+		if (cityName.trim() === "" || stateName.trim() === "") {
+		  document.getElementById("weather").innerHTML = "";
+		} else {
+		  const location = `${cityName},${stateName}`;
+		  fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${location}&aqi=yes`)
+			.then(response => response.json())
+			.then(data => {
+			  console.log(data);
+			  const temperature = Math.round(data['current']['temp_f']);
+			  const inputText = `${temperature}°F in ${cityName}, ${stateName}`;
+			  document.getElementById("weather").innerHTML = inputText;
+			})
+			.catch(error => {
+			  console.error("Error fetching weather data:", error);
+			  document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
+			});
+		}
+	  });
+	  
+
+	// let cityName = prompt("Please enter your city name");
+	// if (cityName == null || cityName == "") {
+	// 	document.getElementById("weather").innerHTML = "";
+	//   } else {
+	// 	fetch(`http://api.weatherapi.com/v1/current.json?key=0f955d09433f415e96515210230811&q=${cityName}&aqi=yes`)
+	// 	.then(response => response.json())
+	// 	.then(data => {
+	// 		const temperature = Math.round(data['current']['temp_f']);
+	// 		const inputText = `${temperature}°F in ${cityName}`;
+	// 		document.getElementById("weather").innerHTML = inputText;
+	// 	})
+	// 	.catch(error => {
+	// 		console.error("Error fetching weather data:", error);
+	// 		document.getElementById("weather").innerHTML = "ERROR: Failed to fetch weather data.";
+	// 	});
+	//   }
 }
 
 // function onDrop(event) {

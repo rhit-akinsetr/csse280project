@@ -21,17 +21,39 @@
         <!-- <i class="material-icons">menu</i> -->
         <!-- </button> -->
         <a class="navbar-brand">&nbsp;&nbsp;My Pocket Closet</a>
-        <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown"
+        <!-- <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="true">
           <i class="material-icons">more_vert</i>
           <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
           <div class="ripple-container"></div>
-        </button>
+        </button> -->
 
 
-          <div class="container d-flex justify-content-end">
+        <div class="container d-flex justify-content-end">
+            <div class="mb-3">
+                <input class="form-control search-bar" id="cityInput" type="search" placeholder="City" aria-label="City">
+              </div>
+            
+              <!-- State Input -->
+              <div class="mb-3">
+                <input class="form-control search-bar" id="stateInput" type="search" placeholder="State" aria-label="State">
+              </div>
+              
+              <!-- Search Button -->
+              <div class="mb-3">
+                <button class="btn btn-outline-light" id="searchButton" type="submit">Search</button>
+              </div>
+        </div>
+
+        
+
+        <div class="container d-flex justify-content-end">
             <div id="weather"></div>
-          </div>
+        </div>
+
+        <div class="container d-flex justify-content-center">
+          <button type="button" id="menuSignOut" class="btn btn-outline-light">Sign Out</button>
+        </div>
 
 
     </header>
@@ -48,7 +70,8 @@
       <li><a id="menuBottoms" class="list-group-item"><i class="material-icons">people</i>Show My Bottoms</a></li>
       <li><a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a></li>
       <li><a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a></li>
-      <li><a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a></li>
+      <li><a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
+      </li>
       <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
     </ul>
   </div>
