@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="styles/main.css">
   <title>My Pocket Closet</title>
 </head>
@@ -15,25 +18,36 @@
   <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
     <header class="bmd-layout-header">
       <div class="navbar navbar-dark bg-faded justify-content-start">
+        <!-- <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-controls="dw-s2" -->
+        <!-- aria-expanded="false" aria-label="Toggle navigation"> -->
+        <!-- <span class="sr-only">Toggle drawer</span> -->
+        <!-- <i class="material-icons">menu</i> -->
+        <!-- </button> -->
         <a class="navbar-brand">&nbsp;&nbsp;My Pocket Closet</a>
+        <!-- <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true">
+          <i class="material-icons">more_vert</i>
+          <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
+          <div class="ripple-container"></div>
+        </button> -->
 
 
         <div class="container d-flex justify-content-end">
-          <div class="mb-3">
-            <input class="form-control search-bar" id="cityInput" type="search" placeholder="City" aria-label="City">
-          </div>
-          <div class="mb-3">
-            <input class="form-control search-bar" id="stateInput" type="search" placeholder="State" aria-label="State">
-          </div>
-          <div class="mb-3">
-            <button class="btn btn-outline-light" id="searchButton" type="submit">Search</button>
-          </div>
+            <div class="mb-3">
+                <input class="form-control search-bar" id="cityInput" type="search" placeholder="City" aria-label="City">
+              </div>
+              <div class="mb-3">
+                <input class="form-control search-bar" id="stateInput" type="search" placeholder="State" aria-label="State">
+              </div>
+              <div class="mb-3">
+                <button class="btn btn-outline-light" id="searchButton" type="submit">Search</button>
+              </div>
         </div>
 
-
+        
 
         <div class="container d-flex justify-content-end">
-          <div id="weather"></div>
+            <div id="weather"></div>
         </div>
 
         <div class="container d-flex justify-content-center">
@@ -51,11 +65,21 @@
       <main>
     </div>
     <ul class="list-group">
-      <li><a id="menuTops" class="list-group-item"><i class="material-icons">people</i>Show My Tops</a></li>
-      <li><a id="menuBottoms" class="list-group-item"><i class="material-icons">people</i>Show My Bottoms</a></li>
-      <li><a id="menuShoes" class="list-group-item"><i class="material-icons">people</i>Show My Shoes</a></li>
-      <li><a id="menuEyewear" class="list-group-item"><i class="material-icons">people</i>Show My Eyewear</a></li>
-      <li><a id="menuAccessories" class="list-group-item"><i class="material-icons">people</i>Show My Accessories</a>
+      <li><a id="menuTops" class="list-group-item"><span class="material-symbols-outlined">
+        laundry
+        </span>Show My Tops</a></li>
+      <li><a id="menuBottoms" class="list-group-item"><span class="material-symbols-outlined">
+        tibia_alt
+        </span>Show My Bottoms</a></li>
+      <li><a id="menuShoes" class="list-group-item"><span class="material-icons">
+        ice_skating
+        </span>Show My Shoes</a></li>
+      <li><a id="menuEyewear" class="list-group-item"><span class="material-icons">
+        visibility
+        </span>Show My Eyewear</a></li>
+      <li><a id="menuAccessories" class="list-group-item"><span class="material-icons">
+        watch
+        </span>Show My Accessories</a>
       </li>
       <div ondrop="drop(event)" ondragover="allowDrop(event)" id="menuClothingType"></div>
     </ul>
@@ -71,9 +95,10 @@
     <div class="flex-grid">
 
       <div class="row">
+        <!-- Shirt -->
 
         <div class="text-center" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <button type="button" class="btn btn-outline-danger" onclick="clearBox()">Clear Outfit</button>
+        <button type="button" class="btn btn-outline-danger" onclick="clearBox()">Clear Box</button>
       </div>
     </div>
   </div>
@@ -87,6 +112,8 @@
   </button>
 
 
+
+  <!-- Modal -->
   <div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="add caption dialog"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -102,6 +129,8 @@
           </div>
           <div class="form-group bmd-form-group img-fluid">
             <label for="inputCaption">Type:</label>
+            <!-- <input type="text" class="form-control" id="inputCaption"> -->
+            <!-- <span class="bmd-help">enter the type of clothing</span> -->
             <form>
               <input id="topsOption" type="radio" value="tops" name="type"><label for="tops">Tops</label></input>
               <input id="bottomOption" type="radio" value="bottoms" name="type"><label
