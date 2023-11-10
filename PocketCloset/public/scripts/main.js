@@ -479,6 +479,7 @@ function navigateToSpecificLink() {
 	});
 }
 
+// https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
 function onDragStart(event) {
 	event.dataTransfer.setData("text/plain", event.target.id);
 	event.target.style.opacity = "0.5";
